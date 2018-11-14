@@ -28,5 +28,23 @@ public class RestAssured {
 			.body("bairro", equalTo("Parque dos Camargos"))
 			.body("cidade", equalTo("Barueri"))		
 			.body("estado", equalTo("SP"));
-	}	
+	}
+	
+	@Test
+	public void TestConsultarCepGetFail() {
+		
+		String numeroCep = "06436010";
+
+		given().contentType("application/json")
+		
+		.when().get("cep/"+numeroCep)
+		
+		.then()		
+			.statusCode(200)
+			.contentType(ContentType.JSON)
+			.body("logradouro", equalTo("Rua"))
+			.body("bairro", equalTo("Bairro"))
+			.body("cidade", equalTo("cidade"))		
+			.body("estado", equalTo("estado"));
+	}
 }
